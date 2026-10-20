@@ -173,6 +173,17 @@ jobs:
           head -1 vendor/shrp/build/tools/roomservice.py
           python3 -m py_compile vendor/shrp/build/tools/roomservice.py
 
+      - name: Stage libfscrypttwrp for libfs_mgr
+        run: |
+          cd "$SRC_DIR"
+          # SHRP's vendor/twrp fork lacks libfscrypt. libfs_mgr's platform
+          # variant needs libfscrypttwrp, so stage our copy in the root Soong
+          # namespace (vendor/twrp) and remove the device-namespace copy.
+          rm -rf vendor/twrp/libfscrypt
+          cp -a device/xiaomi/begonia/libfscrypt vendor/twrp/libfscrypt
+          rm -rf device/xiaomi/begonia/libfscrypt
+          grep -n 'libfscrypttwrp\|recovery_available' vendor/twrp/libfscrypt/Android.bp
+
       - name: Record SHRP source revisions
         run: |
           cd "$SRC_DIR"
