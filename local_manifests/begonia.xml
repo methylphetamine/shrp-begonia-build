@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+    <remote name="methyl" fetch="https://github.com/methylphetamine" />
+
+    <project path="device/xiaomi/begonia"
+             name="device_xiaomi_begonia-shrp"
+             remote="methyl"
+             revision="shrp-12.1"
+             clone-depth="1" />
+</manifest>
