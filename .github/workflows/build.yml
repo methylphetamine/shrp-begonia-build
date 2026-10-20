@@ -164,6 +164,15 @@ jobs:
           echo "--- device tree present? ---"
           ls device/xiaomi/begonia
 
+      - name: Patch SHRP python2 shebang
+        run: |
+          cd "$SRC_DIR"
+          # Ubuntu 22.04 runners have no python2.7. SHRP's roomservice.py is
+          # python3-compatible but still carries a python2.7 shebang.
+          sed -i '1s|python2.7|python3|' vendor/shrp/build/tools/roomservice.py
+          head -1 vendor/shrp/build/tools/roomservice.py
+          python3 -m py_compile vendor/shrp/build/tools/roomservice.py
+
       - name: Record SHRP source revisions
         run: |
           cd "$SRC_DIR"
