@@ -16,7 +16,7 @@ working kernel, DTB, DTBO, keymaster/gatekeeper blobs and fstab, and adds the
 | SHRP recovery source | `SHRP/bootable_recovery` @ `android-12.1` |
 | SHRP vendor config | `SHRP/android_vendor_shrp` @ `v3_12` |
 | TWRP vendor config | `SHRP/android_vendor_twrp` @ `android-12.1` |
-| Device tree | `methylphetamine/device_xiaomi_begonia-shrp` @ `shrp-12.1` |
+| Device tree | `methylphetamine/device_xiaomi_begonia-shrp` @ `shrp-12.1` or `unified` |
 | Product / lunch | `twrp_begonia` / `twrp_begonia-eng` |
 | Make target | `recoveryimage` |
 | Output | `out/target/product/begonia/recovery.img` |
@@ -32,6 +32,9 @@ more recent `v3_11.0` branch is Android 11 and would need a separate tree.
    - `makefile` — default `twrp_begonia-eng`
    - `build_target` — default `recoveryimage`
    - `manifest_branch` — default `shrp-12.1`
+   - `device_branch` — device tree branch, default `shrp-12.1`; set it to
+     `unified` to build the dual-layout tree (dynamic+erofs **and**
+     non-dynamic+ext4/f2fs)
    - `jobs` — default `4` (the runner has 4 vCPUs)
    - `ccache` — default `true`
    - `publish_release` — attach the image to a GitHub release

@@ -15,6 +15,10 @@ on:
         description: 'SHRP manifest branch'
         required: false
         default: 'shrp-12.1'
+      device_branch:
+        description: 'Device tree branch (unified = dynamic+erofs / non-dynamic+ext4-f2fs)'
+        required: false
+        default: 'shrp-12.1'
       jobs:
         description: 'Parallel make jobs'
         required: false
@@ -145,7 +149,11 @@ jobs:
           # Device tree + removal of the dead upstream vendor_utils project.
           mkdir -p .repo/local_manifests
           cp "$GITHUB_WORKSPACE/local_manifests/begonia.xml" .repo/local_manifests/
-          echo "--- local manifest in effect ---"
+          # Device-tree branch is selectable, so `unified` can be built without
+          # editing the pinned manifest.
+          DT_BRANCH="${{ inputs.device_branch || 'shrp-12.1' }}"
+          sed -i -E "s|revision=\"[^\"]+\"|revision=\"${DT_BRANCH}\"|" .repo/local_manifests/begonia.xml
+          echo "--- local manifest in effect (device tree: $DT_BRANCH) ---"
           cat .repo/local_manifests/begonia.xml
           echo "--- project count ---"
           repo list | wc -l
