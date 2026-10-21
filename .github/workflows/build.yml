@@ -16,9 +16,9 @@ on:
         required: false
         default: 'shrp-12.1'
       device_branch:
-        description: 'Device tree branch (unified = dynamic+erofs / non-dynamic+ext4-f2fs)'
+        description: 'Device tree branch (unified = dynamic+erofs + FBEv2 decryption / non-dynamic+ext4-f2fs)'
         required: false
-        default: 'shrp-12.1'
+        default: 'unified'
       jobs:
         description: 'Parallel make jobs'
         required: false
